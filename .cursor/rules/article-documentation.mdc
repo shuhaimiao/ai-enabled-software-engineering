@@ -1,0 +1,107 @@
+---
+description: Article Documentation Rule
+globs: Articles/*.md
+alwaysApply: false
+---
+# Article Documentation Rule
+
+A rule to automate creating and managing article summary documents following a consistent template.
+
+<rule>
+name: article_documentation
+description: Automates creating and managing article summary documents with a consistent format
+filters:
+  - type: event
+    pattern: "file_created"
+  - type: path
+    pattern: "^Articles/.*\\.md$"
+  
+actions:
+  - type: execute
+    command: |
+      # When creating a new article summary file
+      if [[ ! -s "$FILE" ]]; then
+        # Get filename without extension for potential title
+        FILENAME=$(basename "$FILE" .md)
+        
+        # Insert template content with current date
+        cat > "$FILE" << EOL
+# [${FILENAME//-/ }]
+
+**Author:** [Author Name]  
+**Source:** [source_site](mdc:https:/source_url.com)  
+**Date Added:** $(date +%Y-%m-%d)  
+**Status:** To Read  
+**Type:** Article  
+
+## Summary
+[A brief paragraph summarizing the main points or argument of the article.]
+
+## Key Points
+- [First key point or takeaway from the article]
+- [Second key point or takeaway]
+- [Third key point or takeaway]
+- [Fourth key point or takeaway]
+- [Fifth key point or takeaway]
+
+## Notes
+*To be added after reading*
+EOL
+      fi
+      
+  - type: suggest
+    message: |
+      Your article documentation file has been created with the template structure.
+      
+      To complete it:
+      1. Replace [${FILENAME//-/ }] with the actual article title
+      2. Add the author name
+      3. Update the source site name and URL
+      4. Adjust the content type if needed (Article/Blog Post/Paper/Video/Book)
+      5. Fill in the summary section with a brief overview
+      6. Replace the placeholder key points with 3-5 main takeaways
+      
+      After reading the article, you can update the Status to "Completed" and add your personal notes.
+      
+      You can use Cursor AI to help generate the summary and extract key points by asking:
+      "Please help me summarize this article: [paste URL]"
+
+  - type: suggest
+    conditions:
+      - pattern: "Status: Completed"
+        message: |
+          Since you've marked this article as "Completed", don't forget to:
+          1. Fill in your personal notes and reflections
+          2. Check that all key points are accurately captured
+          3. Consider adding tags or categories if you have a system for that
+
+examples:
+  - input: |
+      # Creating a new article file
+      touch Articles/ai-powered-coding.md
+    output: |
+      # [ai powered coding]
+      
+      **Author:** [Author Name]  
+      **Source:** [source_site](mdc:https:/source_url.com)  
+      **Date Added:** 2024-04-17  
+      **Status:** To Read  
+      **Type:** Article  
+      
+      ## Summary
+      [A brief paragraph summarizing the main points or argument of the article.]
+      
+      ## Key Points
+      - [First key point or takeaway from the article]
+      - [Second key point or takeaway]
+      - [Third key point or takeaway]
+      - [Fourth key point or takeaway]
+      - [Fifth key point or takeaway]
+      
+      ## Notes
+      *To be added after reading*
+
+metadata:
+  priority: high
+  version: 1.0
+</rule> 

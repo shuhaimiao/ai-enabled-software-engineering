@@ -1,0 +1,24 @@
+---
+description: Simple Article Rule
+globs: Articles/*.md
+---
+# Simple Article Rule
+
+<rule>
+name: simple_article_rule
+description: Simple rule to test Cursor rule functionality
+filters:
+  - type: path
+    pattern: "^Articles/.*\\.md$"
+
+actions:
+  - type: suggest
+    message: |
+      This is a test rule for article files.
+      
+      Would you like to use the article template?
+
+metadata:
+  priority: high
+  version: 1.0
+</rule> 
