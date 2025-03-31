@@ -12,7 +12,7 @@ name: article_documentation
 description: Automates creating and managing article summary documents with a consistent format
 filters:
   - type: event
-    pattern: "file_created"
+    pattern: "file_create"
   - type: path
     pattern: "^Articles/.*\\.md$"
   
