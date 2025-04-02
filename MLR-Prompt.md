@@ -1,0 +1,16 @@
+Multi-Level Reasoning (MLR) Graph
+In the MLR graph generation phase, MoT converts the task description analysis into an MLR graph. The graph has a well-defined hierarchy and structure, which aids the model in understanding task logic and steps while providing effective guidance for subsequent code generation. MLR graphs enable the model to provide modular designs for programming problems by decomposing tasks step by step and embedding a reasoning process.
+
+Task description analysis: Firstly, the LLM extracts key task information from the programming problem, including the goal description, input and output specifications, and related constraints. The goal description typically outlines the core requirements of the programming problem. The LLM identifies relevant features based on the input specifications, such as data type, list length limits, or condition thresholds. The analysis results form the foundation for modular decomposition.
+
+Modular decomposition:The MLR graph structures task design into three hierarchical levels:
+
+• High-Level: The high-level node designs the primary steps of the entire task, including input verification, algorithmic logic implementation, and result return. Input validation ensures that the input data meets requirements, while the algorithmic logic implements the core steps of the task. The result return node is responsible for output generation and ensuring that the final result meets expectations.
+• Intermediate-Level: Intermediate-level nodes further refine the high-level tasks, specifying how each step should be implemented. For example, input validation can be broken down into subtasks such as checking for empty lists and validating data types. Algorithm implementation can be decomposed into defining loop structures and making conditional judgments.
+• Detailed-Level: Detailed-level nodes specify detailed implementation operations, such as calculating numerical differences or performing conditional checks.
+Each node in an MLR graph is embedded with a reasoning process, which explains the task purpose, decision rationale, and execution strategy:
+
+• Task Purpose: Clarifies the need for the step, such as ensuring input validation to prevent errors in subsequent logic.
+• Decision Rationale: Explains the reasoning behind specific choices, for example, using a nested loop to traverse all element combinations.
+• Execution Strategy: Describes the operational details of the step, such as determining whether conditions are met or handling boundary cases.
+By embedding the reasoning process, the LLMs can gain a better understanding of the design of each node in the MLR graph. In this way, the MLR graph not only delineates the logical structure of task decomposition but also systematically supplies the LLM with the necessary reasoning information for task execution, enhancing its code generation capabilities and logical consistency when processing complex tasks. Note that for simpler programming tasks, LLMs may omit detailed reasoning information for certain nodes and instead provide comprehensive reasoning only for the complex nodes.

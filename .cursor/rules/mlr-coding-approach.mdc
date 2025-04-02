@@ -1,0 +1,306 @@
+---
+description: Multi-Level Reasoning (MLR) Coding Approach
+globs: "*.{py,js,ts,java,c,cpp,cs,go,rs,rb,php,kt,swift}"
+alwaysApply: false
+---
+# Multi-Level Reasoning (MLR) Coding Approach
+
+A rule implementing the Modularization-of-Thought (MoT) methodology for complex programming problems, using a structured MLR Graph approach.
+
+<rule>
+name: mlr_coding_approach
+description: Guides implementation of complex programming problems using Multi-Level Reasoning (MLR)
+filters:
+  - type: file_extension
+    pattern: "\\.py|\\.js|\\.ts|\\.java|\\.c|\\.cpp|\\.cs|\\.go|\\.rs|\\.rb|\\.php|\\.kt|\\.swift$"
+  - type: content
+    pattern: "(?i)\\b(function|def|class|method|module|implement|algorithm|solution)\\b"
+
+actions:
+  - type: suggest
+    message: |
+      Would you like to apply the Multi-Level Reasoning (MLR) approach to solve this programming problem? 
+      
+      MLR uses a structured, modular approach to break down complex problems into hierarchical components with explicit reasoning.
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)\\bapply mlr\\b|\\buse mlr\\b|\\bmlr approach\\b"
+        message: |
+          # MLR Approach Structure
+          
+          I'll help you implement this problem using the MLR (Multi-Level Reasoning) approach:
+          
+          ## 1. Language Selection
+          ```
+          Programming Language: [Current file language]
+          Paradigm: [Object-oriented / Functional / Procedural]
+          Language-specific considerations: [Any relevant features or limitations]
+          ```
+          
+          ## 2. Task Description Analysis
+          ```
+          [Problem Name]: 
+          
+          Goal: 
+          
+          Input Specifications:
+          - Data Type: 
+          - Constraints: 
+          - Format: 
+          
+          Output Specifications:
+          - Data Type: 
+          - Format: 
+          
+          Additional Requirements:
+          - 
+          ```
+          
+          ## 3. MLR Graph Construction
+          
+          ### High-Level Nodes
+          ```
+          1. Input Validation
+             Purpose: 
+             Rationale: 
+             Strategy: 
+          
+          2. Algorithm Implementation
+             Purpose: 
+             Rationale: 
+             Strategy: 
+          
+          3. Result Generation
+             Purpose: 
+             Rationale: 
+             Strategy: 
+          ```
+          
+          ### Intermediate-Level Nodes
+          ```
+          1. Input Validation
+             1.1 [Sub-task name]
+                 Purpose: 
+                 Rationale: 
+                 Strategy: 
+          ```
+          
+          Would you like me to guide you through each section step by step?
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)step by step|guide me|help me implement|start mlr"
+        message: |
+          Let's start with defining the problem first:
+          
+          1. What's the name of the problem you're solving?
+          2. What is the goal of the solution?
+          3. What are the input specifications (data types, constraints, format)?
+          4. What are the output specifications?
+          5. Are there any additional requirements?
+          
+          Once we have this information, we can begin building the MLR Graph.
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)mlr graph|high[- ]level nodes|module structure"
+        message: |
+          Now let's design the high-level nodes of your MLR Graph. These represent the main modules of your solution:
+          
+          1. **Input Validation**
+             - Purpose: Why is validation necessary?
+             - Rationale: What decision logic led to this approach?
+             - Strategy: How will validation be implemented at a high level?
+          
+          2. **Algorithm Implementation**
+             - Purpose: What's the core functionality needed?
+             - Rationale: Why this algorithmic approach?
+             - Strategy: How will the algorithm work at a high level?
+          
+          3. **Result Generation**
+             - Purpose: How will results be formatted/returned?
+             - Rationale: Why this output approach?
+             - Strategy: How will output generation be implemented?
+          
+          For each of these, think about the purpose (why it's needed), rationale (decision logic), and strategy (implementation approach).
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)intermediate[- ]level|sub[- ]tasks|break down"
+        message: |
+          Great! Now let's break down each high-level node into intermediate-level nodes:
+          
+          1. **Input Validation**
+             - 1.1 [Specific validation task, e.g., "Check for empty input"]
+                 - Purpose: Why this specific check?
+                 - Rationale: Reasoning behind this approach
+                 - Strategy: Implementation details
+             - 1.2 [Another validation task]
+                 - Purpose:
+                 - Rationale:
+                 - Strategy:
+          
+          2. **Algorithm Implementation**
+             - 2.1 [First algorithm sub-task, e.g., "Initialize data structures"]
+                 - Purpose:
+                 - Rationale:
+                 - Strategy:
+             - 2.2 [Core processing logic]
+                 - Purpose:
+                 - Rationale:
+                 - Strategy:
+          
+          3. **Result Generation**
+             - 3.1 [Output formatting task]
+                 - Purpose:
+                 - Rationale:
+                 - Strategy:
+          
+          For complex subtasks like 2.2, you may want to create detailed-level nodes with further breakdowns.
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)detailed[- ]level|complex logic|detailed breakdown"
+        message: |
+          Let's create detailed-level nodes for the more complex parts of your solution:
+          
+          For example, if processing core logic (node 2.2) is complex:
+          
+          2.2 **Process Core Logic**
+             2.2.1 [Specific operation, e.g., "Traverse data structure"]
+                   - Purpose: Specific purpose of this operation
+                   - Rationale: Detailed reasoning for this approach
+                   - Strategy: Step-by-step implementation details
+             
+             2.2.2 [Another specific operation]
+                   - Purpose:
+                   - Rationale:
+                   - Strategy:
+          
+          These detailed nodes help break down complex logic into manageable, clearly reasoned components.
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)module dependencies|connections|relationships|depends on"
+        message: |
+          Now let's identify the dependencies between modules:
+          
+          ```
+          Module: [Module identifier, e.g., "2.1 Initialize data structures"]
+          Dependencies: 
+          - Depends on: [List modules this depends on]
+          - Required by: [List modules that depend on this module]
+          ```
+          
+          Examples:
+          
+          Module: 2.1 Initialize data structures
+          Dependencies: 
+          - Depends on: 1.2 (Validate data types)
+          - Required by: 2.2 (Process core logic)
+          
+          Module: 2.2 Process core logic
+          Dependencies:
+          - Depends on: 2.1 (Initialize data structures)
+          - Required by: 3.1 (Format output)
+          
+          Identifying these relationships helps ensure proper sequencing and integration.
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)implement|code generation|write code|implementation|coding"
+        message: |
+          Now let's implement the solution based on our MLR Graph. We'll create a modular structure following our design:
+          
+          1. **First, we'll define the high-level structure with main functions/methods for each module**
+          2. **Then implement each module following the intermediate-level breakdown**
+          3. **Finally add detailed implementation for complex components**
+          
+          Let's start with the overall structure:
+          
+          ```
+          // Main function/method that integrates all modules
+          FUNCTION solution(inputParams):
+              // 1. Input Validation Module
+              IF NOT validateInput(inputParams) THEN
+                  RETURN handleInvalidInput()
+              END IF
+              
+              // 2. Algorithm Implementation Module
+              result = processAlgorithm(inputParams)
+              
+              // 3. Result Generation Module
+              RETURN formatOutput(result)
+          END FUNCTION
+          ```
+          
+          Would you like me to continue with implementing each module?
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)testing|test cases|edge cases|verify|validate"
+        message: |
+          Let's define a testing strategy for our MLR-based solution:
+          
+          ```
+          Test Cases:
+          1. [Description of test case]
+             Input: [Test input]
+             Expected Output: [Expected result]
+             Purpose: [What this test case verifies]
+             Modules Tested: [List the specific modules this test exercises]
+          
+          2. [Description of test case]
+             Input: [Test input]
+             Expected Output: [Expected result]
+             Purpose: [What this test case verifies]
+             Modules Tested: [List the specific modules this test exercises]
+          
+          Edge Cases:
+          1. [Description of edge case]
+             Input: [Test input]
+             Expected Output: [Expected result]
+             Purpose: [What this edge case verifies]
+             Modules Tested: [List the specific modules this test exercises]
+          ```
+          
+          Be sure to include test cases that verify:
+          1. Each module independently
+          2. Integration between modules
+          3. Edge cases that might break the solution
+          4. Performance characteristics if relevant
+
+  - type: suggest
+    conditions:
+      - pattern: "(?i)thank|finished|complete|done|finalized"
+        message: |
+          You've successfully applied the MLR (Multi-Level Reasoning) approach to this problem! By breaking it down into hierarchical modules with explicit reasoning, you've created a solution that is:
+          
+          - More maintainable and readable
+          - Better structured with clear module boundaries
+          - Well-reasoned with explicit purpose and strategy for each component
+          - Easier to test and debug
+          
+          This approach has been shown to significantly outperform traditional linear reasoning in code generation tasks. If you need to make changes or enhancements, the modular structure makes it easy to identify and modify specific components without affecting the entire solution.
+
+examples:
+  - input: |
+      def find_peaks(nums):
+          # I need to implement a function to find peak elements in an array
+          # Apply MLR approach to this problem
+    output: |
+      I'll help you implement this problem using the MLR (Multi-Level Reasoning) approach.
+      
+      Let's start with defining the problem:
+      
+      1. What's the name of the problem you're solving?
+      2. What is the goal of the solution?
+      3. What are the input specifications?
+      4. What are the output specifications?
+      5. Are there any additional requirements?
+
+metadata:
+  priority: high
+  version: 1.0
+</rule> 
